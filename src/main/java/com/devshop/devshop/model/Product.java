@@ -1,9 +1,7 @@
 package com.devshop.devshop.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -16,22 +14,26 @@ public class Product {
     private int id;
 
     private String productName;
-    private String discription;
-    private double price;
-    private long amount;
+    private String description;
+    private BigDecimal price;
+    private int amount;
 
-    public Product() {
+    @ManyToOne(targetEntity = Category.class)
+    private Category category;
+
+    public Product(String productName, String description, BigDecimal price, int amount) {
         this.productName = productName;
-        this.discription = discription;
+        this.description = description;
         this.price = price;
         this.amount = amount;
     }
 
-    public Product(String productName, String productDiscription, Long price, long amount) {
+    public Product(String productName, String description, BigDecimal price, int amount, Category category) {
         this.productName = productName;
-        this.discription = productDiscription;
+        this.description = description;
         this.price = price;
         this.amount = amount;
+        this.category = category;
     }
 
     public int getId() {
@@ -50,28 +52,36 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public long getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
