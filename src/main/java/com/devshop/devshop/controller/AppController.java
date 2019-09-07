@@ -22,7 +22,7 @@ public class AppController {
 
         List<Category>categories=devshopService.getCategoriesList();
         ModelAndView modelAndView=new ModelAndView("home");
-        modelAndView.addObject("category_name", categories);
+        modelAndView.addObject("categories", categories);
 
 
         return modelAndView;

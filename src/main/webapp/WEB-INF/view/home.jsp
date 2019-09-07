@@ -3,6 +3,7 @@
 <html>
 <body>
 
+Widok kategorii
 
 <c:forEach var="category" items="${categories}">
     <tr>
