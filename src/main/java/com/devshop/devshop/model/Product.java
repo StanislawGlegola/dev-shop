@@ -16,23 +16,22 @@ public class Product {
     private int id;
 
     private String productName;
-    private String productDiscription;
-    private Long price;
-    private boolean status;
+    private String discription;
+    private double price;
+    private long amount;
 
     public Product() {
-        this.id = 1;
-        this.productName = "Laptop Acer";
-        this.productDiscription="Cool laptop.";
-        this.price=3200L;
-        this.status=true;
+        this.productName = productName;
+        this.discription = discription;
+        this.price = price;
+        this.amount = amount;
     }
 
-    public Product(String productName, String productDiscription, Long price, boolean status) {
+    public Product(String productName, String productDiscription, Long price, long amount) {
         this.productName = productName;
-        this.productDiscription = productDiscription;
+        this.discription = productDiscription;
         this.price = price;
-        this.status = status;
+        this.amount = amount;
     }
 
     public int getId() {
@@ -51,15 +50,15 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductDiscription() {
-        return productDiscription;
+    public String getDiscription() {
+        return discription;
     }
 
-    public void setProductDiscription(String productDiscription) {
-        this.productDiscription = productDiscription;
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
 
-    public Long getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -67,22 +66,12 @@ public class Product {
         this.price = price;
     }
 
-    public boolean isStatus() {
-        return status;
+    public long getAmount() {
+        return amount;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productName='" + productName + '\'' +
-                ", productDiscription='" + productDiscription + '\'' +
-                ", price=" + price +
-                ", status=" + status +
-                '}';
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 
     @Override
