@@ -7,3 +7,5 @@ insert INTO Product (id, productName, category_id, discription, price, amount) v
 insert INTO Product (id, productName, category_id, discription, price, amount) values (nextval('product_seq'), 'Laptop Acer',1, 'laptop7',4800,10);
 
 insert INTO Category(id, categoryName) values (nextval('product_seq'),'Laptopy');
+
+commit;
