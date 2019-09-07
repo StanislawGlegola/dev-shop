@@ -19,7 +19,7 @@ public class Product {
     private int amount;
 
     @ManyToOne(targetEntity = Category.class)
-    private Category categoryId;
+    private Category category;
 
     public Product(String productName, String description, BigDecimal price, int amount) {
         this.productName = productName;
@@ -28,12 +28,12 @@ public class Product {
         this.amount = amount;
     }
 
-    public Product(String productName, String description, BigDecimal price, int amount, Category categoryId) {
+    public Product(String productName, String description, BigDecimal price, int amount, Category category) {
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.amount = amount;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 
     public int getId() {
@@ -76,12 +76,12 @@ public class Product {
         this.amount = amount;
     }
 
-    public Category getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

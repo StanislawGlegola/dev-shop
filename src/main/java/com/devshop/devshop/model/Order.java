@@ -12,13 +12,13 @@ public class Order {
 	private long id;
 
 	@ManyToOne(targetEntity = User.class)
-	private User userId;
+	private User user;
 
 	public Order() {
 	}
 
-	public Order(User userId) {
-		this.userId = userId;
+	public Order(User user) {
+		this.user = user;
 	}
 
 	public long getId() {
@@ -29,17 +29,15 @@ public class Order {
 		this.id = id;
 	}
 
-	public User getUserId() {
-		return userId;
-	}
-
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public User getUser() {
+		return user;
 	}
 
 	public void setUser(User user) {
-		this.userId = user;
+		this.user = user;
 	}
+
+
 
 	@Override
 	public boolean equals(Object o) {

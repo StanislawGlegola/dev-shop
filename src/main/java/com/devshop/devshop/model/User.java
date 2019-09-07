@@ -15,7 +15,7 @@ public class User {
 
 
 	@ManyToOne(targetEntity = Role.class)
-	private Role roleId;
+	private Role role;
 
 	public User(String username, String password, String firstName, String lastName, String address) {
 		this.username = username;
@@ -31,7 +31,7 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-		this.roleId = role;
+		this.role = role;
 	}
 
 	public String getUsername() {
@@ -75,11 +75,11 @@ public class User {
 	}
 
 	public Role getRole() {
-		return roleId;
+		return role;
 	}
 
 	public void setRole(Role role) {
-		this.roleId = role;
+		this.role = role;
 	}
 
 	@Override

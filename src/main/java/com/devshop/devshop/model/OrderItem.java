@@ -13,11 +13,11 @@ public class OrderItem {
 	private int amount;
 
 	@ManyToOne(targetEntity = Order.class)
-	private Order orderId;
+	private Order order;
 
 
 	@ManyToOne(targetEntity = Product.class)
-	private Product productId;
+	private Product product;
 
 	public OrderItem(int amount) {
 		this.amount = amount;
@@ -25,10 +25,10 @@ public class OrderItem {
 
 
 	// na wszelki wypadek konstruktor dla wsyzstkich zmiennych
-	public OrderItem(int amount, Order orderId, Product productId) {
+	public OrderItem(int amount, Order order, Product product) {
 		this.amount = amount;
-		this.orderId = orderId;
-		this.productId = productId;
+		this.order = order;
+		this.product = product;
 	}
 
 	public long getId() {
@@ -47,21 +47,21 @@ public class OrderItem {
 		this.amount = amount;
 	}
 
-	public Order getOrderId() {
-		return orderId;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setOrderId(Order orderId) {
-		this.orderId = orderId;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
-	public Product getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProductId(Product productId) {
+	public void setProduct(Product product) {
 
-		this.productId = productId;
+		this.product = product;
 	}
 
 	@Override
