@@ -20,10 +20,9 @@ public class AppController {
     @GetMapping("/")
     public ModelAndView getCategoriesScreen() {
 
-        List<Category>categories=devshopService.getCategoriesList();
+        List<Category>categories=devshopService.findAll();
         ModelAndView modelAndView=new ModelAndView("home");
         modelAndView.addObject("categories", categories);
-
 
         return modelAndView;
     }
