@@ -6,11 +6,11 @@
 
     <h3>Please login</h3>
 
-    <form action="/login" method='POST' name='loginForm'>
+    <form action="/login" method="POST" name="loginForm">
 
         <table>
             <tr>
-                <td>User:</td>
+                <td>Username:</td>
                 <td><input name="username" type="text"/></td>
             </tr>
             <tr>
