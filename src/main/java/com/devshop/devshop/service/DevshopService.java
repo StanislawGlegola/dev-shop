@@ -14,7 +14,7 @@ public class DevshopService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<Category> getCategoriesList() {
+    public List<Category> findAll() {
         List<Category> allCategories = categoryRepository.findAll();
         return allCategories;
     }
