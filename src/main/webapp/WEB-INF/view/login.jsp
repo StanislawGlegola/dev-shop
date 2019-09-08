@@ -20,8 +20,9 @@
             <tr>
                 <td colspan="2"><input name="submit" type="submit" value="submit"/></td>
             </tr>
-        </table>
 
+        </table>
+        <br><a href="/">Back to homepage</a><br>
     </form>
 </div>
 
