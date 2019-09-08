@@ -26,4 +26,8 @@ public class AppController {
 
         return modelAndView;
     }
+    @GetMapping("/login")
+    public ModelAndView getLoginPage() {
+        return new ModelAndView("login");
+    }
 }
