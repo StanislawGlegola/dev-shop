@@ -17,7 +17,7 @@ public class AppController {
         this.devshopService = devshopService;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public ModelAndView getCategoriesScreen() {
 
         List<Category>categories=devshopService.getCategoriesList();
