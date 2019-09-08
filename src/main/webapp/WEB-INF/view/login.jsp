@@ -6,7 +6,7 @@
 
     <h3>Please login</h3>
 
-    <form action="/login" method='POST' name='loginForm'>
+    <form action="/login" method="POST" name="loginForm">
 
         <table>
             <tr>

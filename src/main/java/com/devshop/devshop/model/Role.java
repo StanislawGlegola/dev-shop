@@ -1,5 +1,7 @@
 package com.devshop.devshop.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,32 +9,29 @@ import javax.persistence.SequenceGenerator;
 import java.util.Objects;
 
 @Entity
-public class Role {
+public class Role implements GrantedAuthority {
 
 	@Id
 	@GeneratedValue(generator = "roleSeq")
 	@SequenceGenerator(name = "roleSeq", sequenceName = "role_seq", allocationSize = 1)
-	private long id;
-	private String roleName;
+	private Long id;
+	private String authority;
 
-	public Role(String roleName) {
-		this.roleName = roleName;
-	}
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	@Override
+	public String getAuthority() {
+		return authority;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 	@Override
@@ -40,11 +39,12 @@ public class Role {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Role role = (Role) o;
-		return id == role.id;
+		return Objects.equals(id, role.id) &&
+				Objects.equals(authority, role.authority);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(id, authority);
 	}
 }

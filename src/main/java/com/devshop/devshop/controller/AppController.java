@@ -20,14 +20,25 @@ public class AppController {
     @GetMapping("/")
     public ModelAndView getCategoriesScreen() {
 
-        List<Category>categories=devshopService.findAll();
-        ModelAndView modelAndView=new ModelAndView("home");
+        List<Category> categories = devshopService.findAll();
+        ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("categories", categories);
 
         return modelAndView;
     }
+
     @GetMapping("/login")
     public ModelAndView getLoginPage() {
         return new ModelAndView("login");
+    }
+
+    @GetMapping("/accessDenied")
+    public ModelAndView getAccessDeniedPage() {
+        return new ModelAndView("accessDenied");
+    }
+
+    @GetMapping("/admin")
+    public ModelAndView getAdminPage() {
+        return new ModelAndView("admin");
     }
 }

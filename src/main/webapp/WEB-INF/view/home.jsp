@@ -2,9 +2,9 @@
 
 <html>
 <body>
-<a href="/login">Log in</a>
+<a href="/admin">Admin panel</a>
 <hr>
-<h3>Choose category:</h3><br>
+<h3>Category List:</h3><br>
 
 <c:forEach var="category" items="${categories}">
    <table> <tr>
