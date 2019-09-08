@@ -1,8 +1,8 @@
 <html>
 <body>
 
-<h2>No user with this username found!</h2>
-<a href="/login">Try to login again</a> or
+<h2>You don't have sufficient permission to access this page!</h2>
+<a href="/login">Login again</a> or
 <a href="/">Return to homepage</a>
 
 </body>
