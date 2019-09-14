@@ -14,11 +14,11 @@
 
 
     <h2>Category List</h2>
-    <p>Pick one of ours products from given categories:</p>
+    <p>Pick one of our products from given categories:</p>
     <ul class="w3-ul" style="width:250px">
         <c:forEach var="category" items="${categories}">
             <li class="w3-blue" style="text-align:center"><a
-                    href="/productList/${category.id}">Enter ${category.categoryName}</a></li>
+                    href="/productList/${category.id}">${category.categoryName}</a></li>
         </c:forEach>
     </ul>
 </div>
