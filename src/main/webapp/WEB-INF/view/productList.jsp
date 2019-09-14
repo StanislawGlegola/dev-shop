@@ -2,6 +2,9 @@
 
 <html>
 <head>
+    <title>IntelliJ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         table, th, td {
             border: 1px solid black;
@@ -23,9 +26,7 @@
 
 <h2>View products by categories</h2>
 <br>
-<br>
-<br>
-
+<div class="w3-container" >
 <table>
     <tr>
         <th>Product name</th>
@@ -34,9 +35,9 @@
         <th>Product quantity</th>
 
     </tr>
-</table>
+
 <c:forEach var="product" items="${products}">
-    <table>
+
         <tr>
                 <td>${product.productName}</td>
                 <td>${product.description}</td>
@@ -45,8 +46,10 @@
             <td><a href="/user/{user.username}/product/{product.id}"><button>Add to cart</button></a></td>
             </form>
         </tr>
-    </table>
+
 </c:forEach>
+</table>
+</div>
 <br>
 <a href="/">Go back to category list</a>
 </body>
