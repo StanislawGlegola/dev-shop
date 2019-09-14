@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body bgcolor="#e9ebee">
+<div class="w3-container" style="width:250px">
+    <br>
+<img src="http://fcchyby.home.pl/javapoz15/devshop_logo.png"; width="160" ><br><br>
 <a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
 
-<div class="w3-container" style="width:250px">
+
     <h2>Category List</h2>
     <p>Pick one of ours products from given categories:</p>
     <ul class="w3-ul" style="width:250px">

@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body bgcolor="#e9ebee">
-<div>
+<br>
+<div class="w3-container" >
+<img src="http://fcchyby.home.pl/javapoz15/devshop_logo.png"; width="160" ><br><br>
+
+
 
     <h3>Please login</h3>
-    <div class="w3-container" >
+
     <form action="/login" method="POST" name="loginForm">
 
         <table>
