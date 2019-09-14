@@ -1,16 +1,25 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
-<title>Admin view</title>
+<head>
+<title>devSHOP admin view</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
 <style>
     table, th, td {
         text-align: center;
     }
 </style>
-<body>
+<body bgcolor="#e9ebee">
+<br>
+<div class="w3-container" >
+    <img src="http://fcchyby.home.pl/javapoz15/devshop_logo.png"; width="160" ><br><br>
 
 <a href="/logout">Logout</a>
 
 <h2>You are logged in as an administrator!</h2>
+    <br>
+    <h3>Add new product:</h3>
 
 <form:form method="POST" action="/newProduct" modelAttribute="product">
     Product name:
@@ -23,7 +32,7 @@
     <form:input type="number" path="amount"/><br>
     Set price:
     <form:label path="price"></form:label>
-    <form:input path="price"/><br>
+    <form:input type="number" path="price"/><br>
 
     <p>Pick product category:</p>
     <table>
@@ -47,8 +56,7 @@
     <br><br><br>
     <input type="submit" value="Send form">
     <input type="reset" value="Clear data">
-    </div>
 </form:form>
-
+</div>
 </body>
 </html>

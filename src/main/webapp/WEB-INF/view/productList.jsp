@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>IntelliJ</title>
+    <title>devSHOP product list</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
@@ -26,7 +26,7 @@
 <img src="http://fcchyby.home.pl/javapoz15/devshop_logo.png"; width="160" ><br><br>
 <a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
 
-<h2>View products by categories</h2>
+<h2>Product list by category</h2>
 
 <br>
 
