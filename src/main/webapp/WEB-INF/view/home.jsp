@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body bgcolor="#e9ebee">
-<a href="/admin">Admin panel</a>
+<a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
 
 <div class="w3-container" style="width:250px">
     <h2>Category List</h2>
