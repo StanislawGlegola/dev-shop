@@ -7,6 +7,7 @@ import com.devshop.devshop.service.DevshopService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -29,20 +30,25 @@ public class AppController {
 
         return modelAndView;
     }
-    @GetMapping("/cart")
-    public ModelAndView getCartScreen(){
 
-        List<OrderItem> orderedItems=devshopService.productsInCart();
-        ModelAndView modelAndView=new ModelAndView("cart");
-        modelAndView.addObject("orderItems",orderedItems);
+    @GetMapping("/cart")
+    public ModelAndView getCartScreen() {
+        List<OrderItem> orderedItems = devshopService.productsInCart();
+        ModelAndView modelAndView = new ModelAndView("cart");
+        modelAndView.addObject("orderItems", orderedItems);
 
         return modelAndView;
     }
+
+    @GetMapping("/cart/add/{productId}/{orderId}")
+    public void addProductToCart(@PathVariable Long orderId, @PathVariable Long productId) {
+    }
+
     @GetMapping("/productList/{id}")
-    public ModelAndView getProductListByCategories(@PathVariable Long id){
-        List<Product>productsList=devshopService.printProductsFromCategories(id);
-        ModelAndView modelAndView=new ModelAndView("productList");
-        modelAndView.addObject("products",productsList);
+    public ModelAndView getProductListByCategories(@PathVariable Long id) {
+        List<Product> productsList = devshopService.printProductsFromCategories(id);
+        ModelAndView modelAndView = new ModelAndView("productList");
+        modelAndView.addObject("products", productsList);
 
         return modelAndView;
     }
@@ -58,7 +64,10 @@ public class AppController {
     }
 
     @GetMapping("/admin")
-    public ModelAndView getAdminPage() {
-        return new ModelAndView("admin");
+    public ModelAndView addProductList() {
+
+        ModelAndView modelAndView = new ModelAndView("admin");
+        modelAndView.addObject("product", new Product());
+        return modelAndView;
     }
 }
