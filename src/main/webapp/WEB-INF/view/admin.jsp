@@ -32,7 +32,7 @@
     <form:input type="number" path="amount"/><br>
     Set price:
     <form:label path="price"></form:label>
-    <form:input type="number" path="price"/><br>
+    <form:input type="number" min="0.00" step="0.01" path="price"/><br>
 
     <p>Pick product category:</p>
     <table>
