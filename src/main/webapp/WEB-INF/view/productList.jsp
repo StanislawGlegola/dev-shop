@@ -21,13 +21,15 @@
     </style>
 </head>
 <body bgcolor="#e9ebee">
-
+<div class="w3-container" >
+<br>
+<img src="http://fcchyby.home.pl/javapoz15/devshop_logo.png"; width="160" ><br><br>
 <a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
 
 <h2>View products by categories</h2>
 
 <br>
-<div class="w3-container" >
+
     <ul class="w3-ul" >
 <table>
 
@@ -53,8 +55,8 @@
 </c:forEach>
         </ul>
 </table>
-</div>
 <br>
 <a href="/">Go back to category list</a>
+</div>
 </body>
 </html>
