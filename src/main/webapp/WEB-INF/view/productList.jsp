@@ -18,8 +18,10 @@
     </style>
 </head>
 <body bgcolor="#e9ebee">
->
-View products by categories
+
+<a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
+
+<h2>View products by categories</h2>
 <br>
 <br>
 <br>
@@ -45,6 +47,7 @@ View products by categories
         </tr>
     </table>
 </c:forEach>
-
+<br>
+<a href="/">Go back to category list</a>
 </body>
 </html>

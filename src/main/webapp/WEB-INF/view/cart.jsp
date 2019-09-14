@@ -2,7 +2,8 @@
 
 <html>
 <body>
-View Cart
+<a href="/logout">Logout</a>
+<h2>View Cart</h2>
 <br>
 <c:forEach var="orderedItem" items="${orderedItems}">
     <tr>
