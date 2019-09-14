@@ -17,7 +17,8 @@
         }
     </style>
 </head>
-<body>
+<body bgcolor="#e9ebee">
+>
 View products by categories
 <br>
 <br>
@@ -35,12 +36,11 @@ View products by categories
 <c:forEach var="product" items="${products}">
     <table>
         <tr>
-            <form method="get">
                 <td>${product.productName}</td>
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.amount}</td>
-                <td><input type="submit" name="id" value="Add to cart"></td>
+            <td><a href="/user/{user.username}/product/{product.id}"><button>Add to cart</button></a></td>
             </form>
         </tr>
     </table>
