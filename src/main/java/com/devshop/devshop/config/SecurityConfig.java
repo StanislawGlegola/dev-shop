@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/admin").permitAll()//.hasAuthority("ADMIN")
                 .antMatchers("/cart").permitAll()//.hasAuthority("USER")
-                .antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()//.authenticated()
                 .and()
                 .formLogin().loginPage("/login")
                 .usernameParameter("username")
