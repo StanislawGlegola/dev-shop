@@ -25,9 +25,12 @@
 <a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
 
 <h2>View products by categories</h2>
+
 <br>
 <div class="w3-container" >
+    <ul class="w3-ul" >
 <table>
+
     <tr>
         <th>Product name</th>
         <th>Product description</th>
@@ -43,11 +46,12 @@
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.amount}</td>
-            <td><a href="/user/{user.username}/product/{product.id}"><button>Add to cart</button></a></td>
+            <td> <li class="w3-blue" style="text-align:center; width:150px"><a href="/user/{user.username}/product/{product.id}">Add to cart</a></li></td>
             </form>
         </tr>
 
 </c:forEach>
+        </ul>
 </table>
 </div>
 <br>
