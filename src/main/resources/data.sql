@@ -1,9 +1,7 @@
 
 
-insert INTO Category(id, category_name) values (nextval('category_seq'),'Laptops');
-insert INTO Category(id, category_name) values (nextval('category_seq'),'Phones');
-insert INTO Category(id, category_name) values (nextval('category_seq'),'Monitors');
-insert INTO Category(id, category_name) values (nextval('category_seq'),'Printers');
+insert INTO Category(id, category_name) values (nextval('category_seq'),'Laptopy');
+insert INTO Category(id, category_name) values (nextval('category_seq'),'Telefony');
 
 insert INTO Product (id, product_name, category_id, description, price, amount) values (nextval('product_seq'), 'Laptop Acer',1, 'laptop1',2000,10);
 insert INTO Product (id, product_name, category_id, description, price, amount) values (nextval('product_seq'), 'Laptop Lenovo',1, 'laptop2',3200,10);
@@ -30,17 +28,12 @@ insert INTO Product (id, product_name, category_id, description, price, amount) 
 insert INTO Product (id, product_name, category_id, description, price, amount) values (nextval('product_seq'), 'printer Samsung',2, 'printer5',240,10);
 
 
+insert INTO Role(id, role_name) values (nextval('role_seq'),'USER');
+insert INTO Role(id, role_name) values (nextval('role_seq'),'ADMIN');
 
-insert INTO Role(id, authority) values (nextval('role_seq'),'ADMIN');
-insert INTO Role(id, authority) values (nextval('role_seq'),'USER');
-
-insert INTO User(username, password, first_name, last_name, address,role_id) values ('admin' ,'$2a$10$IPJizmA0rxJBq9incE/PWub6B2nIDGm3z/2cIz6hAs/hgvKlQ5F9q', 'Szymon', 'Mantey', 'ul.Sikorskiego 2 Dziębówko 64-990', 1);
-insert INTO User(username, password, first_name, last_name, address,role_id) values ('user' ,'$2a$10$KvxPudrieuxpEgxw3e4yPOuYK59PgfQshx3RaVUTCpbKB82DC/0RC', 'Maria', 'Stachura', 'ul.Kolejowa 21 Piła 64-980', 2);
-
-
-insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'user',0);
-insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'admin',1);
-
+insert INTO User(username, password, first_name, last_name, address,role_id) values ('vanndhall' ,'vanndhall', 'Szymon', 'Mantey', 'ul.Sikorskiego 2 Dziębówko 64-990', 1);
+insert INTO User(username, password, first_name, last_name, address,role_id) values ('Marry3' ,'marry3', 'Maria', 'Stachura', 'ul.Kolejowa 21 Piła 64-980', 2);
+insert INTO User(username, password, first_name, last_name, address,role_id) values ('DaddyDaa' ,'daddydaa', 'Janusz', 'Łucz', 'ul.Dąbrowskiego 3 Gdańsk 67-770', 2);
 
 
 
