@@ -96,7 +96,7 @@ public class AppController {
 
 
     @GetMapping("/addToCart/{id}")
-    public String addProductgit stash applyToCart(@PathVariable int id) {  //zad3
+    public String addProductapplyToCart(@PathVariable int id) {  //zad3
 
         // User session Needed!
         Orders order = new Orders();

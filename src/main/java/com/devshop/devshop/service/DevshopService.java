@@ -74,4 +74,7 @@ public class DevshopService {
     public List<OrderItem> FindAllProductFromOrder(){
         return orderItemRepository.findAll();
     }
+
+    public void addProduct(Product product) {
+    }
 }
