@@ -9,7 +9,7 @@
 <body bgcolor="#e9ebee">
 <br>
 <div class="w3-container" >
-<img src="http://fcchyby.home.pl/javapoz15/devshop_logo.png"; width="160" ><br><br>
+<img src="http://fcchyby.home.pl/javapoz15/devshop_logo.png"; width="200" ><br><br>
 
 
 
