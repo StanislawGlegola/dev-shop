@@ -35,7 +35,9 @@ insert INTO User(username, password, first_name, last_name, address,role_id) val
 insert INTO User(username, password, first_name, last_name, address,role_id) values ('user' ,'$2a$10$KvxPudrieuxpEgxw3e4yPOuYK59PgfQshx3RaVUTCpbKB82DC/0RC', 'Maria', 'Stachura', 'ul.Kolejowa 21 Piła 64-980', 2);
 
 
-insert INTO Orders(id,user_username) values (nextVal('order_seq'), 'user');
+insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'user',0);
+insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'admin',1);
+
 
 
 

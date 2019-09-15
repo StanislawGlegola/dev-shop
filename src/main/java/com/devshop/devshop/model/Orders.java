@@ -14,11 +14,22 @@ public class Orders {
 	@ManyToOne(targetEntity = User.class)
 	private User user;
 
+	private boolean status;
+
+
 	public Orders() {
 	}
 
 	public Orders(User user) {
 		this.user = user;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	public long getId() {
