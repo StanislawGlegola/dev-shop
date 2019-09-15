@@ -5,10 +5,7 @@ import com.devshop.devshop.model.OrderItem;
 import com.devshop.devshop.model.Product;
 import com.devshop.devshop.service.DevshopService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -73,9 +70,9 @@ public class AppController {
     }
 
     @PostMapping("/newProduct")
-    public String addNewProductToDB(Product product){
+    public String addNewProductToDB(@ModelAttribute Product product){
         devshopService.addProduct(product);
-        return "redirect:/admin";
+        return "redirect:/productList/"+product.getCategory().getId();
     }
 
     @GetMapping("/admin/{productId}")

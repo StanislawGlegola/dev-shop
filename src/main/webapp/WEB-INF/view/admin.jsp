@@ -25,10 +25,12 @@
     <br>
     <h3>Manage product:</h3>
 
+<%--
     <spring:url value="/product/edit" var="editProduct"/>
-    <spring:url value="/newProduct" var="addProduct" />
+--%>
+    <spring:url value="/newProduct" var="addProduct"/>
 
-<form:form method="POST" action="${edit ? editProduct : addProduct}" modelAttribute="product">
+<form:form method="POST" action="${addProduct}" modelAttribute="product">
 
     <tr>
         <td><form:label path="id" readonly="${edit}" type="${edit ? '' : 'hidden'}">id</form:label></td>
