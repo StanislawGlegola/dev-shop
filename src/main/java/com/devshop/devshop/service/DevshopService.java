@@ -50,4 +50,8 @@ public class DevshopService {
     public void addProduct(Product product) {
         productRepository.save(product);
     }
+
+    public Product findProductById(int productId) {
+        return productRepository.findById(productId).orElseThrow(() -> new RuntimeException(""));
+    }
 }
