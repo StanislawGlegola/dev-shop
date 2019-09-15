@@ -23,7 +23,7 @@
 <body bgcolor="#e9ebee">
 <div class="w3-container" >
 <br>
-<img src="/img/devshop_logo.png"; width="200" /><br><br>
+    <a href="/"><img src="/img/devshop_logo.png"; width="200" /></a><br><br>
 <a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
 
 <h2>Product list by category</h2>
