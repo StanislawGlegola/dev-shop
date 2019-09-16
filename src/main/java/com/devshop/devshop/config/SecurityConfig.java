@@ -24,13 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/productList/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/admin").permitAll()//.hasAuthority("ADMIN")
-                .antMatchers("/cart").permitAll()//.hasAuthority("USER")
-                .antMatchers("/**").permitAll()//.authenticated()
+                .antMatchers("/admin").hasAuthority("ADMIN")
+                .antMatchers("/**").authenticated()
                 .and()
                 .formLogin().loginPage("/login")
                 .usernameParameter("username")
@@ -43,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login?logout");
     }
 
     @Override
