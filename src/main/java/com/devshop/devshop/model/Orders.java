@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Order {
+public class Orders {
 
 	@Id
 	@GeneratedValue(generator = "orderSeq")
@@ -14,11 +14,22 @@ public class Order {
 	@ManyToOne(targetEntity = User.class)
 	private User user;
 
-	public Order() {
+	private boolean status;
+
+
+	public Orders() {
 	}
 
-	public Order(User user) {
+	public Orders(User user) {
 		this.user = user;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	public long getId() {
@@ -41,8 +52,8 @@ public class Order {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Order order = (Order) o;
-		return id == order.id;
+		Orders orders = (Orders) o;
+		return id == orders.id;
 	}
 
 	@Override

@@ -1,16 +1,16 @@
 package com.devshop.devshop.service;
 
-import com.devshop.devshop.model.Category;
-import com.devshop.devshop.model.Order;
-import com.devshop.devshop.model.OrderItem;
-import com.devshop.devshop.model.Product;
+import com.devshop.devshop.model.*;
 import com.devshop.devshop.repository.CategoryRepository;
 import com.devshop.devshop.repository.OrderItemRepository;
-import com.devshop.devshop.repository.OrderRepository;
+import com.devshop.devshop.repository.OrdersRepository;
+
 import com.devshop.devshop.repository.ProductRepository;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DevshopService {
@@ -19,17 +19,17 @@ public class DevshopService {
     private final ProductRepository productRepository;
     private Product product;
     private OrderItem orderItem;
-    private final OrderRepository orderRepository;
+    private final OrdersRepository ordersRepository;
     private Order order;
 
 
-    public DevshopService(CategoryRepository categoryRepository, OrderItemRepository orderItemRepository, ProductRepository productRepository, OrderRepository orderRepository) {
+    public DevshopService(CategoryRepository categoryRepository, OrderItemRepository orderItemRepository, ProductRepository productRepository, OrdersRepository ordersRepository) {
         this.categoryRepository = categoryRepository;
         this.orderItemRepository = orderItemRepository;
         this.productRepository = productRepository;
-        this.product=product;
+        this.product = product;
         this.orderItem = orderItem;
-        this.orderRepository = orderRepository;
+        this.ordersRepository = ordersRepository;
     }
 
     public List<Category> findAll() {
@@ -47,7 +47,63 @@ public class DevshopService {
         return printProducts;
     }
 
+
     public void addProduct(Product product) {
         productRepository.save(product);
     }
+
+
+    //dodanne
+    public Optional<Product> addProductToCart(Product product) {
+       // List<Product> products = productRepository.findAll();
+        int id = product.getId();
+        Optional<Product> productsInCart  = productRepository.findById(id);
+        return  productsInCart;
+    }
+
+    public Product findProduct(int id){
+
+        Product product  = productRepository.findById(id).orElseThrow((() -> new RuntimeException()));
+        return product;
+    }
+
+
+    public Orders addOrders(Orders order) {
+        return ordersRepository.save(order);
+    }
+
+    public OrderItem addOrderItem(OrderItem orderItem){
+        return orderItemRepository.save(orderItem);
+    }
+
+
+    public List<OrderItem> findAllOrderItemsByOrder(Long ordersId) {
+        return orderItemRepository.findByOrders(ordersId);
+
+    }
+    public List<OrderItem> findAllProductFromOrder(){
+        return orderItemRepository.findAll();
+
+    }
+    public List<OrderItem> findProductsFromOrder(Long ordersId) {
+        return orderItemRepository.findByOrders(ordersId);
+    }
+
+    //TODO  obsłużyć wyjątek w przypadku gdy w FindOrderByUsername zwróci null, do poprawienia
+    public Orders findOrderByUsername(User user) {
+        Orders readyOrder;
+        String username = user.getUsername();
+        Orders order = ordersRepository.FindOrderByUsername(username);
+        if(order !=null){
+            readyOrder = order;
+        }else {
+            readyOrder = new Orders();
+            readyOrder.setUser(user);
+            readyOrder.setStatus(false);
+            addOrders(readyOrder);
+        }
+        return readyOrder;
+    }
+
+
 }

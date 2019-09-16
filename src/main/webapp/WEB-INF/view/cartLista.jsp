@@ -2,21 +2,11 @@
 
 <html>
 <body>
-<a href="/logout">Logout</a>
-<h2>View Cart</h2>
+View Cart
 <br>
 
 
 
-<table>
-    <tr>
-        <th>Product name</th>
-        <th>Product description</th>
-        <th>Product price</th>
-        <th>Product quantity</th>
-
-    </tr>
-</table>
 <c:forEach var="orderedItem" items="${orderItems}">
     <tr>
         <td>${orderedItem.product.productName}</td>
