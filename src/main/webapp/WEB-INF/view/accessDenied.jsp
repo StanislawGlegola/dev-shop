@@ -7,7 +7,7 @@
 <body bgcolor="#e9ebee">
 <div class="w3-container" >
     <br>
-    <a href="/"><img src="/img/devshop_logo.png"; width="200" /></a><br><br>
+    <a href="/"><img src="http://fcchyby.home.pl/javapoz15/devshop_logo.png"; width="200" /></a><br><br>
 
 <h2>You don't have sufficient permission to access this page!</h2>
 <a href="/login">Login again</a> or
