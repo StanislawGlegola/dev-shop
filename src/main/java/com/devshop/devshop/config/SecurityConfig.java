@@ -1,6 +1,7 @@
 package com.devshop.devshop.config;
 
 import com.devshop.devshop.service.UserDetailsService;
+import com.devshop.devshop.service.UserLoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,10 +25,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/productList/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/admin").hasAuthority("ADMIN")
+                .antMatchers("/cart").hasAuthority("USER")
+                //.antMatchers("/cart").permitAll()
                 .antMatchers("/**").authenticated()
+                //.antMatchers("/**").permitAll()
+
                 .and()
                 .formLogin().loginPage("/login")
                 .usernameParameter("username")
@@ -40,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login?logout");
+                .logoutSuccessUrl("/");
     }
 
     @Override
@@ -50,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     AuthenticationSuccessHandler successHandler() {
-        return new SavedRequestAwareAuthenticationSuccessHandler();
+        return new UserLoginSuccessHandler();
     }
 
     @Bean

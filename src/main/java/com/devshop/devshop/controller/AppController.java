@@ -1,10 +1,8 @@
 package com.devshop.devshop.controller;
 
-import com.devshop.devshop.model.Category;
-import com.devshop.devshop.model.OrderItem;
-import com.devshop.devshop.model.Orders;
-import com.devshop.devshop.model.Product;
+import com.devshop.devshop.model.*;
 import com.devshop.devshop.service.DevshopService;
+import com.devshop.devshop.service.SessionUserProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +15,11 @@ import java.util.List;
 public class AppController {
 
     private final DevshopService devshopService;
+    private final SessionUserProvider sessionUserProvider;
 
-    public AppController(DevshopService devshopService) {
+    public AppController(DevshopService devshopService, SessionUserProvider sessionUserProvider) {
         this.devshopService = devshopService;
+        this.sessionUserProvider = sessionUserProvider;
     }
 
     @GetMapping("/")
@@ -76,41 +76,28 @@ public class AppController {
         return "redirect:/admin";
     }
 
-//    @PostMapping("/cart")//value =
-//    public ModelAndView addProductToCart(){
-//
-//        return new ModelAndView("cart");
-//    }
-
-
     @GetMapping("/cart/{ordersId}")
     public ModelAndView getCartLista(@PathVariable Long ordersId){
-
-      //  List<OrderItem> orderedItems=devshopService.FindAllOrderItemsByOrder(ordersId);
-        List<OrderItem> orderedItems= devshopService.FindAllProductFromOrder();
+        List<OrderItem> orderedItems= devshopService.findProductsFromOrder(ordersId);
         ModelAndView modelAndView=new ModelAndView("cart");
         modelAndView.addObject("orderItems",orderedItems);
 
         return modelAndView;
     }
 
-
     @GetMapping("/addToCart/{id}")
-    public String addProductapplyToCart(@PathVariable int id) {  //zad3
-
+    public String addProductToCart(@PathVariable int id) {  //zad3
         // User session Needed!
-        Orders order = new Orders();
-        //dodanie ordera
-
-        Orders saveorder = devshopService.addOrders(order);
-        Product product = devshopService.findProduct(id);
+        //znaleźć zamówienie uzytkownika,jeżeli istnieje i status = false(niezrealizowane)
+        //uzyć id tego zamowenia i dopisywać produkty jezlei nie istnieje lub status = true(zrealizowane)- utworzyc nowe zamowienie i dodać produkty.
         //save order repository dodac metody w serwisie wykorzystująć  repository, dodać order do bazy danych a nastepnie zwrocic order id do productCart redirect
-        //item.setProduct(product);
 
-        OrderItem orderItem = new OrderItem(product.getAmount(),saveorder,product);
+        User user = sessionUserProvider.getLoggedUser();
+        Orders orders = devshopService.findOrderByUsername(user);
+        Product product = devshopService.findProduct(id);
+        OrderItem orderItem = new OrderItem(product.getAmount(),orders,product);
         devshopService.addOrderItem(orderItem);
-
-        return "redirect:/cart/" + saveorder.getId();
+        return "redirect:/cart/" + orders.getId();
     }
 
 }
