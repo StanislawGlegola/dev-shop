@@ -60,4 +60,11 @@ insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'admin
 
 
 
+
+insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'user',0);
+insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'admin',1);
+
+
+
+
 commit;
