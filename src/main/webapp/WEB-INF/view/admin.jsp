@@ -21,10 +21,8 @@
 </style>
 <body bgcolor="#e9ebee">
 <br>
-<div class="w3-container">
-    <img src="/img/devshop_logo.png" ; width="200"/><br><br>
 <div class="w3-container" >
-    <a href="/"><img src="/img/devshop_logo.png"; width="200" /></a><br><br>
+    <a href="/"><img src="/img/devshop_logo.png" width="200" /></a><br><br>
   
     <a href="/logout">Logout</a>
 

@@ -6,8 +6,6 @@
 <h2>View Cart</h2>
 <br>
 
-
-
 <table>
     <tr>
         <th>Product name</th>
