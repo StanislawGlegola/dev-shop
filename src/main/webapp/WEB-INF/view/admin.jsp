@@ -23,7 +23,9 @@
 <br>
 <div class="w3-container">
     <img src="/img/devshop_logo.png" ; width="200"/><br><br>
-
+<div class="w3-container" >
+    <a href="/"><img src="/img/devshop_logo.png"; width="200" /></a><br><br>
+  
     <a href="/logout">Logout</a>
 
     <h2>You are logged in as an administrator!</h2>

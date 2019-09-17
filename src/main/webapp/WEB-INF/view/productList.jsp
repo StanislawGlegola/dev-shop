@@ -23,7 +23,7 @@
 <body bgcolor="#e9ebee">
 <div class="w3-container" >
 <br>
-<img src="/img/devshop_logo.png"; width="200" /><br><br>
+    <a href="/"><img src="/img/devshop_logo.png"; width="200" /></a><br><br>
 <a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
 
 <h2>Product list by category</h2>
@@ -50,6 +50,7 @@
                 <li class="w3-blue" style="text-align:center; width:150px"><a href="/user/${user.username}/product/${product.id}">Add to cart</a></li>
                 <li class="w3-blue" style="text-align:center; width:150px"><a href="/admin/${product.id}">Edit</a></li>
             </td>
+            <td> <li class="w3-blue" style="text-align:center; width:150px"><a href="/addToCart/${product.id}">Add to cart</a></li></td>
             </form>
         </tr>
 

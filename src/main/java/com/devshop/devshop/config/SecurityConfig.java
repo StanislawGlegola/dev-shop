@@ -1,6 +1,7 @@
 package com.devshop.devshop.config;
 
 import com.devshop.devshop.service.UserDetailsService;
+import com.devshop.devshop.service.UserLoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,9 +29,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/productList/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/admin").permitAll()//.hasAuthority("ADMIN")
-                .antMatchers("/cart").permitAll()//.hasAuthority("USER")
-                .antMatchers("/**").permitAll()//.authenticated()
+                .antMatchers("/admin").hasAuthority("ADMIN")
+                .antMatchers("/cart").hasAuthority("USER")
+                //.antMatchers("/cart").permitAll()
+                .antMatchers("/img/**").permitAll()
+                .antMatchers("/**").authenticated()
+                //.antMatchers("/**").permitAll()
+
                 .and()
                 .formLogin().loginPage("/login")
                 .usernameParameter("username")
@@ -53,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     AuthenticationSuccessHandler successHandler() {
-        return new SavedRequestAwareAuthenticationSuccessHandler();
+        return new UserLoginSuccessHandler();
     }
 
     @Bean
