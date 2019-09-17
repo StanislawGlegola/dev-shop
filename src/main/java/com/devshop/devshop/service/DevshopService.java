@@ -52,6 +52,10 @@ public class DevshopService {
         productRepository.save(product);
     }
 
+    public Product findProductById(int productId) {
+        return productRepository.findById(productId).orElseThrow(() -> new RuntimeException(""));
+    }
+
 
     //dodanne
     public Optional<Product> addProductToCart(Product product) {
@@ -104,6 +108,4 @@ public class DevshopService {
         }
         return readyOrder;
     }
-
-
 }

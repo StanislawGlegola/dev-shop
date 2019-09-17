@@ -38,16 +38,18 @@
         <th>Product description</th>
         <th>Product price</th>
         <th>Product quantity</th>
-
     </tr>
 
 <c:forEach var="product" items="${products}">
-
         <tr>
                 <td>${product.productName}</td>
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.amount}</td>
+            <td>
+                <li class="w3-blue" style="text-align:center; width:150px"><a href="/user/${user.username}/product/${product.id}">Add to cart</a></li>
+                <li class="w3-blue" style="text-align:center; width:150px"><a href="/admin/${product.id}">Edit</a></li>
+            </td>
             <td> <li class="w3-blue" style="text-align:center; width:150px"><a href="/addToCart/${product.id}">Add to cart</a></li></td>
             </form>
         </tr>

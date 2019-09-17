@@ -68,12 +68,23 @@ public class AppController {
     public ModelAndView viewAdminProductAddFormular() {
         ModelAndView modelAndView = new ModelAndView("admin");
         modelAndView.addObject("product", new Product());
+        modelAndView.addObject("edit", false);
         return modelAndView;
     }
+
     @PostMapping("/newProduct")
-    public String addNewProductToDB(Product product){
+    public String addNewProductToDB(@ModelAttribute Product product){
         devshopService.addProduct(product);
-        return "redirect:/admin";
+        return "redirect:/productList/"+product.getCategory().getId();
+    }
+
+    @GetMapping("/admin/{productId}")
+    public ModelAndView updateProductListView(@PathVariable int productId) {
+        ModelAndView modelAndView = new ModelAndView("admin");
+        Product foundProduct = devshopService.findProductById(productId);
+        modelAndView.addObject("product", foundProduct);
+        modelAndView.addObject("edit", true);
+        return modelAndView;
     }
 
     @GetMapping("/cart/{ordersId}")
