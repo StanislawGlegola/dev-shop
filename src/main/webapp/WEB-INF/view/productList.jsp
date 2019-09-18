@@ -21,43 +21,40 @@
     </style>
 </head>
 <body bgcolor="#e9ebee">
-<div class="w3-container" >
-<br>
-    <a href="/"><img src="/img/devshop_logo.png" width="200" /></a><br><br>
-<a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
+<div class="w3-container">
+    <br>
+    <a href="/"><img src="/img/devshop_logo.png" width="200"/></a><br><br>
+    <a href="/admin">Admin panel</a> || <a href="/cart">Your cart</a>
 
-<h2>Product list by category</h2>
+    <h2>Product list by category</h2>    <br>
 
-<br>
-
-    <ul class="w3-ul" >
-<table>
-
-    <tr>
-        <th>Product name</th>
-        <th>Product description</th>
-        <th>Product price</th>
-        <th>Product quantity</th>
-    </tr>
-
-<c:forEach var="product" items="${products}">
-        <tr>
+    <ul class="w3-ul">
+        <table>
+            <tr>
+                <th>Product name</th>
+                <th>Product description</th>
+                <th>Product price</th>
+                <th>Product quantity</th>
+            </tr>
+            <c:forEach var="product" items="${products}">
+            <tr>
                 <td>${product.productName}</td>
                 <td>${product.description}</td>
                 <td>${product.price}</td>
                 <td>${product.amount}</td>
-            <td>
-                <li class="w3-blue" style="text-align:center; width:150px"><a href="/addToCart/${product.id}">Add to cart</a></li>
-                <li class="w3-blue" style="text-align:center; width:150px"><a href="/admin/${product.id}">Edit</a></li>
-            </td>
-            </form>
-        </tr>
+                <td>
+                    <li class="w3-blue" style="text-align:center; width:150px"><a href="/addToCart/${product.id}">Add to cart</a></li>
+                    <li class="w3-blue" style="text-align:center; width:150px"><a href="/admin/${product.id}">Edit</a></li>
+                    <li class="w3-blue" style="text-align:center; width:150px"><a href="/remove/${product.id}">Remove</a></li>
 
-</c:forEach>
-        </ul>
-</table>
-<br>
-<a href="/">Go back to category list</a>
+                </td>
+                </form>
+            </tr>
+            </c:forEach>
+    </ul>
+    </table>
+    <br>
+    <a href="/">Go back to category list</a>
 </div>
 </body>
 </html>

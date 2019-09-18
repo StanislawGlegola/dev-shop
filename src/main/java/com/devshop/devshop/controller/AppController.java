@@ -42,10 +42,6 @@ public class AppController {
         return modelAndView;
     }
 
-    @GetMapping("/cart/add/{productId}/{orderId}")
-    public void addProductToCart(@PathVariable Long orderId, @PathVariable Long productId) {
-    }
-
     @GetMapping("/productList/{id}")
     public ModelAndView getProductListByCategories(@PathVariable Long id) {
         List<Product> productsList = devshopService.printProductsFromCategories(id);
@@ -74,9 +70,9 @@ public class AppController {
     }
 
     @PostMapping("/newProduct")
-    public String addNewProductToDB(@ModelAttribute Product product){
+    public String addNewProductToDB(@ModelAttribute Product product) {
         devshopService.addProduct(product);
-        return "redirect:/productList/"+product.getCategory().getId();
+        return "redirect:/productList/" + product.getCategory().getId();
     }
 
     @GetMapping("/admin/{productId}")
@@ -89,10 +85,10 @@ public class AppController {
     }
 
     @GetMapping("/cart/{ordersId}")
-    public ModelAndView getCartLista(@PathVariable Long ordersId){
-        List<OrderItem> orderedItems= devshopService.findProductsFromOrder(ordersId);
-        ModelAndView modelAndView=new ModelAndView("cart");
-        modelAndView.addObject("orderItems",orderedItems);
+    public ModelAndView getCartLista(@PathVariable Long ordersId) {
+        List<OrderItem> orderedItems = devshopService.findProductsFromOrder(ordersId);
+        ModelAndView modelAndView = new ModelAndView("cart");
+        modelAndView.addObject("orderItems", orderedItems);
 
         return modelAndView;
     }
@@ -107,9 +103,15 @@ public class AppController {
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
         Product product = devshopService.findProduct(id);
-        OrderItem orderItem = new OrderItem(product.getAmount(),orders,product);
+        OrderItem orderItem = new OrderItem(product.getAmount(), orders, product);
         devshopService.addOrderItem(orderItem);
         return "redirect:/cart/" + orders.getId();
     }
 
+    @GetMapping("/remove/{id}")
+    public String removePosition(@PathVariable int id) {
+        Product product = (devshopService.findProductById(id));
+        devshopService.removeProduct(product);
+        return "redirect:/productList/"+product.getCategory().getId();
+    }
 }
