@@ -4,3 +4,5 @@ Aplikacja webowa napisana w oparciu o technologie java, spring, spring data i sp
   
 DevShop to aplikacja webowa symulująca sklep internetowy dla programistów i pozwalająca na zamawianie wybranej elektroniki. Po zalogowani jako User mamy dostęp do podglądu wszystkich produktów z podziałem na kategorie oraz dodawanie ich do zamówienia. Logowanie jako administrator pozwala dodatkowo zarządzać pozycjami na liście zamówień.
 <devShop/>
+Logowanie dla usera - login user, haslo user;
+Logowanie dla administratora - login admin, haslo admin;
