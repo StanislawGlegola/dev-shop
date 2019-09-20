@@ -1,3 +1,4 @@
+
 <devShop>
 Aplikacja webowa napisana w oparciu o technologie java, spring, spring data i spring security. Celem napisania aplikacji było zaprezentowanie dobrych praktyk programistycznych (Rest, Clean code, CRUD), oraz podsumowanie i utrwalenie wiedzy i umiejętności z poznanych technologii.
   
