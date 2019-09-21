@@ -107,15 +107,10 @@ public class AppController {
         return "redirect:/cart/" + orders.getId();
     }
 
-    @GetMapping("/removeFromCart/{productId}/{categoryId}")
-    public String removeFromCart(@PathVariable int productId, Long categoryId) {
-        User user = sessionUserProvider.getLoggedUser();
-        Orders orders = devshopService.findOrderByUsername(user);
-        Product product = devshopService.findProduct(productId);
-
-        OrderItem orderItem = new OrderItem(1, orders, product);
-        devshopService.removeOrderItem(orderItem);
-
-        return "redirect:/cart/"+ orders.getId();
+    @GetMapping("/removeFromCart/{orderItemId}")
+    public String removeFromCart(@PathVariable Long orderItemId) {
+        Orders orders = devshopService.findOrderByOrderItemId(orderItemId);
+        devshopService.deleteOrderItemById(orderItemId);
+        return "redirect:/cart/" + orders.getId();
     }
 }
