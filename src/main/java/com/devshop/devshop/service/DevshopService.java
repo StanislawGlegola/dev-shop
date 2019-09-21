@@ -4,7 +4,6 @@ import com.devshop.devshop.model.*;
 import com.devshop.devshop.repository.CategoryRepository;
 import com.devshop.devshop.repository.OrderItemRepository;
 import com.devshop.devshop.repository.OrdersRepository;
-
 import com.devshop.devshop.repository.ProductRepository;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
@@ -42,11 +41,15 @@ public class DevshopService {
         return orderedItems;
     }
 
+    public List<OrderItem> removeOrderItem(int productId) {
+        List<OrderItem> orderedItems = orderItemRepository.delete(productId);
+        return orderedItems;
+    }
+
     public List<Product> printProductsFromCategories(Long categoryid) {
         List<Product> printProducts = productRepository.findByCategoryId(categoryid);
         return printProducts;
     }
-
 
     public void addProduct(Product product) {
         productRepository.save(product);
@@ -55,7 +58,6 @@ public class DevshopService {
     public Product findProductById(int productId) {
         return productRepository.findById(productId).orElseThrow(() -> new RuntimeException(""));
     }
-
 
     //dodanne
     public Optional<Product> addProductToCart(Product product) {
@@ -71,7 +73,6 @@ public class DevshopService {
         return product;
     }
 
-
     public Orders addOrders(Orders order) {
         return ordersRepository.save(order);
     }
@@ -80,15 +81,20 @@ public class DevshopService {
         return orderItemRepository.save(orderItem);
     }
 
+    public OrderItem removeOrderItem(OrderItem orderItem) {
+        return orderItemRepository.delete(orderItem);
+    }
 
     public List<OrderItem> findAllOrderItemsByOrder(Long ordersId) {
         return orderItemRepository.findByOrders(ordersId);
 
     }
+
     public List<OrderItem> findAllProductFromOrder(){
         return orderItemRepository.findAll();
 
     }
+
     public List<OrderItem> findProductsFromOrder(Long ordersId) {
         return orderItemRepository.findByOrders(ordersId);
     }

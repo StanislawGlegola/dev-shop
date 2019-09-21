@@ -42,10 +42,6 @@ public class AppController {
         return modelAndView;
     }
 
-    @GetMapping("/cart/add/{productId}/{orderId}")
-    public void addProductToCart(@PathVariable Long orderId, @PathVariable Long productId) {
-    }
-
     @GetMapping("/productList/{id}")
     public ModelAndView getProductListByCategories(@PathVariable Long id) {
         List<Product> productsList = devshopService.printProductsFromCategories(id);
@@ -74,9 +70,9 @@ public class AppController {
     }
 
     @PostMapping("/newProduct")
-    public String addNewProductToDB(@ModelAttribute Product product){
+    public String addNewProductToDB(@ModelAttribute Product product) {
         devshopService.addProduct(product);
-        return "redirect:/productList/"+product.getCategory().getId();
+        return "redirect:/productList/" + product.getCategory().getId();
     }
 
     @GetMapping("/admin/{productId}")
@@ -89,11 +85,10 @@ public class AppController {
     }
 
     @GetMapping("/cart/{ordersId}")
-    public ModelAndView getCartLista(@PathVariable Long ordersId){
-        List<OrderItem> orderedItems= devshopService.findProductsFromOrder(ordersId);
-        ModelAndView modelAndView=new ModelAndView("cart");
-        modelAndView.addObject("orderItems",orderedItems);
-
+    public ModelAndView getCartLista(@PathVariable Long ordersId) {
+        List<OrderItem> orderedItems = devshopService.findProductsFromOrder(ordersId);
+        ModelAndView modelAndView = new ModelAndView("cart");
+        modelAndView.addObject("orderItems", orderedItems);
         return modelAndView;
     }
 
@@ -103,13 +98,24 @@ public class AppController {
         //znaleźć zamówienie uzytkownika,jeżeli istnieje i status = false(niezrealizowane)
         //uzyć id tego zamowenia i dopisywać produkty jezlei nie istnieje lub status = true(zrealizowane)- utworzyc nowe zamowienie i dodać produkty.
         //save order repository dodac metody w serwisie wykorzystująć  repository, dodać order do bazy danych a nastepnie zwrocic order id do productCart redirect
-
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
         Product product = devshopService.findProduct(id);
-        OrderItem orderItem = new OrderItem(product.getAmount(),orders,product);
+        product.setAmount(product.getAmount() - 1);
+        OrderItem orderItem = new OrderItem(1, orders, product);
         devshopService.addOrderItem(orderItem);
         return "redirect:/cart/" + orders.getId();
     }
 
+    @GetMapping("/removeFromCart/{productId}/{categoryId}")
+    public String removeFromCart(@PathVariable int productId, Long categoryId) {
+        User user = sessionUserProvider.getLoggedUser();
+        Orders orders = devshopService.findOrderByUsername(user);
+        Product product = devshopService.findProduct(productId);
+
+        OrderItem orderItem = new OrderItem(1, orders, product);
+        devshopService.removeOrderItem(orderItem);
+
+        return "redirect:/cart/"+ orders.getId();
+    }
 }
