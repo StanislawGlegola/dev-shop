@@ -1,5 +1,6 @@
 package com.devshop.devshop.service;
 
+import com.devshop.devshop.exception.ProductNotFoundException;
 import com.devshop.devshop.model.*;
 import com.devshop.devshop.repository.CategoryRepository;
 import com.devshop.devshop.repository.OrderItemRepository;
@@ -40,7 +41,7 @@ public class DevshopService {
     }
 
     public Product findProductById(int productId) {
-        return productRepository.findById(productId).orElseThrow(() -> new RuntimeException(""));
+        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Id: "+productId+" is not found."));
     }
 
     //dodanne
@@ -49,12 +50,6 @@ public class DevshopService {
         int id = product.getId();
         Optional<Product> productsInCart = productRepository.findById(id);
         return productsInCart;
-    }
-
-    public Product findProduct(int id) {
-
-        Product product = productRepository.findById(id).orElseThrow((() -> new RuntimeException()));
-        return product;
     }
 
     Orders addOrders(Orders order) {
@@ -67,7 +62,6 @@ public class DevshopService {
 
     public List<OrderItem> findAllOrderItemsByOrder(Long ordersId) {
         return orderItemRepository.findByOrders(ordersId);
-
     }
 
     public List<OrderItem> findAllProductFromOrder() {
@@ -78,11 +72,11 @@ public class DevshopService {
         return orderItemRepository.findByOrders(ordersId);
     }
 
-    //TODO  obsłużyć wyjątek w przypadku gdy w FindOrderByUsername zwróci null, do poprawienia
+    //TODO  obsłużyć wyjątek w przypadku gdy w findOrderByUsername zwróci null, do poprawienia
     public Orders findOrderByUsername(User user) {
         Orders readyOrder;
         String username = user.getUsername();
-        Orders order = ordersRepository.FindOrderByUsername(username);
+        Orders order = ordersRepository.findOrderByUsername(username);
         if (order != null) {
             readyOrder = order;
         } else {
