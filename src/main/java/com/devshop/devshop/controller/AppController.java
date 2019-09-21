@@ -102,7 +102,7 @@ public class AppController {
 
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
-        Product product = devshopService.findProduct(id);
+        Product product = devshopService.findProductById(id);
         OrderItem orderItem = new OrderItem(product.getAmount(), orders, product);
         devshopService.addOrderItem(orderItem);
         return "redirect:/cart/" + orders.getId();
