@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface OrdersRepository extends JpaRepository<Orders, Long> {
+public interface OrdersRepository1 extends JpaRepository<Orders, Long> {
 
 	@Query(value = "SELECT * from orders WHERE status=false AND user_username = :username  ",nativeQuery = true)
 	Orders findOrderByUsername(String username);
