@@ -11,6 +11,4 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 
 	@Query(value = "SELECT * from order_item WHERE orders_id = :orders",nativeQuery = true)
 	List<OrderItem> findByOrders(Long orders);
-
-	List<OrderItem> delete(int productId);
 }
