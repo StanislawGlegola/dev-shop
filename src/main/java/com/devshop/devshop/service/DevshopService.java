@@ -3,10 +3,9 @@ package com.devshop.devshop.service;
 import com.devshop.devshop.exception.OrderItemNotFoundException;
 import com.devshop.devshop.model.*;
 import com.devshop.devshop.repository.CategoryRepository;
-import com.devshop.devshop.repository.OrderItemRepository;
+import com.devshop.devshop.repository.OrderItemRepository1;
 import com.devshop.devshop.repository.OrdersRepository;
 import com.devshop.devshop.repository.ProductRepository;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +14,13 @@ import java.util.Optional;
 @Service
 public class DevshopService {
     private final CategoryRepository categoryRepository;
-    private final OrderItemRepository orderItemRepository;
+    private final OrderItemRepository1 orderItemRepository1;
     private final ProductRepository productRepository;
     private final OrdersRepository ordersRepository;
 
-    public DevshopService(CategoryRepository categoryRepository, OrderItemRepository orderItemRepository, ProductRepository productRepository, OrdersRepository ordersRepository) {
+    public DevshopService(CategoryRepository categoryRepository, OrderItemRepository1 orderItemRepository1, ProductRepository productRepository, OrdersRepository ordersRepository) {
         this.categoryRepository = categoryRepository;
-        this.orderItemRepository = orderItemRepository;
+        this.orderItemRepository1 = orderItemRepository1;
         this.productRepository = productRepository;
         this.ordersRepository = ordersRepository;
     }
@@ -32,7 +31,7 @@ public class DevshopService {
     }
 
     public List<OrderItem> productsInCart() {
-        List<OrderItem> orderedItems = orderItemRepository.findAll();
+        List<OrderItem> orderedItems = orderItemRepository1.findAll();
         return orderedItems;
     }
 
@@ -68,20 +67,20 @@ public class DevshopService {
     }
 
     public OrderItem addOrderItem(OrderItem orderItem){
-        return orderItemRepository.save(orderItem);
+        return orderItemRepository1.save(orderItem);
     }
 
     /* public List<OrderItem> findAllOrderItemsByOrder(int ordersId) {
-        return orderItemRepository.findByOrders(ordersId);
+        return orderItemRepository1.findByOrders(ordersId);
 
     }*/
 
     /* public List<OrderItem> findAllProductFromOrder(){
-        return orderItemRepository.findAll();
+        return orderItemRepository1.findAll();
     }*/
 
     public List<OrderItem> findProductsFromOrder(Long ordersId) {
-        return orderItemRepository.findByOrders(ordersId);
+        return orderItemRepository1.findByOrders(ordersId);
     }
 
     //TODO  obsłużyć wyjątek w przypadku gdy w FindOrderByUsername zwróci null, do poprawienia
@@ -101,11 +100,11 @@ public class DevshopService {
     }
 
     public void deleteOrderItemById(Long orderItemId) {
-        orderItemRepository.deleteById(orderItemId);
+        orderItemRepository1.deleteById(orderItemId);
     }
 
     public Orders findOrderByOrderItemId(Long orderItemId) {
-        Optional<OrderItem> byId = orderItemRepository.findById(orderItemId);
+        Optional<OrderItem> byId = orderItemRepository1.findById(orderItemId);
         if(byId.isPresent()){
             OrderItem orderItem = byId.get();
             Product product = productRepository.findById(orderItem.getProduct().getId()).get();
