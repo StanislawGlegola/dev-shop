@@ -1,7 +1,7 @@
 package com.devshop.devshop.service;
 
 
-import com.devshop.devshop.repository.ProductRepository;
+import com.devshop.devshop.repository.ProductRepository1;
 import com.devshop.devshop.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,11 +16,11 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     private final UserRepository userRepository;
 
-    private final ProductRepository productRepository;
+    private final ProductRepository1 productRepository1;
 
-    public UserDetailsService(UserRepository userRepository, ProductRepository productRepository) {
+    public UserDetailsService(UserRepository userRepository, ProductRepository1 productRepository1) {
         this.userRepository = userRepository;
-        this.productRepository = productRepository;
+        this.productRepository1 = productRepository1;
     }
 
     @Override

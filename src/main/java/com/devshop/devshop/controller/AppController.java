@@ -94,13 +94,13 @@ public class AppController {
 
     @GetMapping("/addToCart/{id}")
     public String addProductToCart(@PathVariable int id) {  //zad3
-        // User session Needed!
+        //User session Needed!
         //znaleźć zamówienie uzytkownika,jeżeli istnieje i status = false(niezrealizowane)
         //uzyć id tego zamowenia i dopisywać produkty jezlei nie istnieje lub status = true(zrealizowane)- utworzyc nowe zamowienie i dodać produkty.
         //save order repository dodac metody w serwisie wykorzystująć  repository, dodać order do bazy danych a nastepnie zwrocic order id do productCart redirect
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
-        Product product = devshopService.findProduct(id);
+        Product product = devshopService.findProductById(id);
         product.setAmount(product.getAmount() - 1);
         OrderItem orderItem = new OrderItem(1, orders, product);
         devshopService.addOrderItem(orderItem);
