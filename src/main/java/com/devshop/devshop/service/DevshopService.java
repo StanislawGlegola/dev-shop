@@ -4,7 +4,7 @@ import com.devshop.devshop.exception.ProductNotFoundException;
 import com.devshop.devshop.model.*;
 import com.devshop.devshop.repository.CategoryRepository;
 import com.devshop.devshop.repository.OrderItemRepository;
-import com.devshop.devshop.repository.OrdersRepository1;
+import com.devshop.devshop.repository.OrdersRepository;
 import com.devshop.devshop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +16,13 @@ public class DevshopService {
     private final CategoryRepository categoryRepository;
     private final OrderItemRepository orderItemRepository;
     private final ProductRepository productRepository;
-    private final OrdersRepository1 ordersRepository1;
+    private final OrdersRepository ordersRepository;
 
-    public DevshopService(CategoryRepository categoryRepository, OrderItemRepository orderItemRepository, ProductRepository productRepository, OrdersRepository1 ordersRepository1) {
+    public DevshopService(CategoryRepository categoryRepository, OrderItemRepository orderItemRepository, ProductRepository productRepository, OrdersRepository ordersRepository) {
         this.categoryRepository = categoryRepository;
         this.orderItemRepository = orderItemRepository;
         this.productRepository = productRepository;
-        this.ordersRepository1 = ordersRepository1;
+        this.ordersRepository = ordersRepository;
     }
 
     public List<Category> findAll() {
@@ -53,7 +53,7 @@ public class DevshopService {
     }
 
     Orders addOrders(Orders order) {
-        return ordersRepository1.save(order);
+        return ordersRepository.save(order);
     }
 
     public OrderItem addOrderItem(OrderItem orderItem) {
@@ -76,7 +76,7 @@ public class DevshopService {
     public Orders findOrderByUsername(User user) {
         Orders readyOrder;
         String username = user.getUsername();
-        Orders order = ordersRepository1.findOrderByUsername(username);
+        Orders order = ordersRepository.findOrderByUsername(username);
         if (order != null) {
             readyOrder = order;
         } else {
