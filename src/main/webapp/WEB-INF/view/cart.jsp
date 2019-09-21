@@ -1,26 +1,55 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-<body>
-<a href="/logout">Logout</a>
-<h2>View Cart</h2>
-<br>
+<head>
+    <title>devSHOP your cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
 
-<table>
-    <tr>
-        <th>Product name</th>
-        <th>Product description</th>
-        <th>Product price</th>
-        <th>Product quantity</th>
+        th, td {
+            padding: 5px;
+            text-align: left;
+            width: 100px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body bgcolor="#e9ebee">
+<div class="w3-container">
+    <br>
+    <a href="/"><img src="/img/devshop_logo.png" width="200"/></a><br><br>
+    <a href="/logout">Logout</a>
+    <h2>Your Cart</h2>
+    <br>
 
-    </tr>
-</table>
-<c:forEach var="orderedItem" items="${orderItems}">
-    <tr>
-        <td>${orderedItem.product.productName}</td>
-        <td>${orderedItem.amount}</td>
-    </tr>
-</c:forEach>
+    <ul class="w3-ul">
 
+        <table>
+            <tr>
+                <th>Product name</th>
+                <th>Product description</th>
+                <th>Product price</th>
+                <th>Product quantity</th>
+            </tr>
+
+            <c:forEach var="orderedItem" items="${orderItems}">
+            <tr>
+                <td>${orderedItem.product.productName}</td>
+                <td>${orderedItem.product.description}</td>
+                <td>${orderedItem.product.price}</td>
+                <td>${orderedItem.amount}</td>
+            </tr>
+            </c:forEach>
+    </ul>
+    </table>
+    <br>
+    <a href="/">Continue shopping</a> or Checkout
+</div>
 </body>
 </html>
