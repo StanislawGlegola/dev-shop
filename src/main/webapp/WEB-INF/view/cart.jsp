@@ -44,6 +44,7 @@
                 <td>${orderedItem.product.description}</td>
                 <td>${orderedItem.product.price}</td>
                 <td>${orderedItem.amount}</td>
+                <td><li class="w3-blue" style="text-align:center; width:150px"><a href="/removeFromCart/${orderedItem.id}">Remove</a></li></td>
             </tr>
             </c:forEach>
     </ul>

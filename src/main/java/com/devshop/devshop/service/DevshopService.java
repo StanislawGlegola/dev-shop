@@ -1,6 +1,7 @@
 package com.devshop.devshop.service;
 
 import com.devshop.devshop.exception.ProductNotFoundException;
+import com.devshop.devshop.exception.OrderItemNotFoundException;
 import com.devshop.devshop.model.*;
 import com.devshop.devshop.repository.CategoryRepository;
 import com.devshop.devshop.repository.OrderItemRepository;
@@ -38,6 +39,10 @@ public class DevshopService {
     public List<Product> printProductsFromCategories(Long categoryid) {
         List<Product> printProducts = productRepository.findByCategoryId(categoryid);
         return printProducts;
+    }
+
+    public void addProduct(Product product) {
+        productRepository.save(product);
     }
 
     public Product findProductById(int productId) {
@@ -88,11 +93,25 @@ public class DevshopService {
         return readyOrder;
     }
 
-    public void addProduct(Product product) {
-        productRepository.save(product);
-    }
-
     public void removeProduct(Product product) {
         productRepository.delete(product);
+    }
+
+    public void deleteOrderItemById(Long orderItemId) {
+        orderItemRepository.deleteById(orderItemId);
+    }
+
+    public Orders findOrderByOrderItemId(Long orderItemId) {
+        Optional<OrderItem> byId = orderItemRepository.findById(orderItemId);
+        if(byId.isPresent()){
+            OrderItem orderItem = byId.get();
+            Product product = productRepository.findById(orderItem.getProduct().getId()).get();
+            product.setAmount(product.getAmount() + 1);
+            productRepository.save(product);
+            return orderItem.getOrders();
+        }
+        else {
+            throw new OrderItemNotFoundException("No such order.");
+        }
     }
 }

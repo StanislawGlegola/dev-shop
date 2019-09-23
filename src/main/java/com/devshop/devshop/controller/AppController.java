@@ -89,7 +89,6 @@ public class AppController {
         List<OrderItem> orderedItems = devshopService.findProductsFromOrder(ordersId);
         ModelAndView modelAndView = new ModelAndView("cart");
         modelAndView.addObject("orderItems", orderedItems);
-
         return modelAndView;
     }
 
@@ -99,19 +98,19 @@ public class AppController {
         //znaleźć zamówienie uzytkownika,jeżeli istnieje i status = false(niezrealizowane)
         //uzyć id tego zamowenia i dopisywać produkty jezlei nie istnieje lub status = true(zrealizowane)- utworzyc nowe zamowienie i dodać produkty.
         //save order repository dodac metody w serwisie wykorzystująć  repository, dodać order do bazy danych a nastepnie zwrocic order id do productCart redirect
-
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
         Product product = devshopService.findProductById(id);
-        OrderItem orderItem = new OrderItem(product.getAmount(), orders, product);
+        product.setAmount(product.getAmount() - 1);
+        OrderItem orderItem = new OrderItem(1, orders, product);
         devshopService.addOrderItem(orderItem);
         return "redirect:/cart/" + orders.getId();
     }
 
-    @GetMapping("/remove/{id}")
-    public String removePosition(@PathVariable int id) {
-        Product product = (devshopService.findProductById(id));
-        devshopService.removeProduct(product);
-        return "redirect:/productList/"+product.getCategory().getId();
+    @GetMapping("/removeFromCart/{orderItemId}")
+    public String removeFromCart(@PathVariable Long orderItemId) {
+        Orders orders = devshopService.findOrderByOrderItemId(orderItemId);
+        devshopService.deleteOrderItemById(orderItemId);
+        return "redirect:/cart/" + orders.getId();
     }
 }

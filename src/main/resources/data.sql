@@ -27,18 +27,13 @@ insert INTO Product (id, product_name, category_id, description, price, amount) 
 insert INTO Product (id, product_name, category_id, description, price, amount) values (nextval('product_seq'), 'printer Canon',4, 'printer4',250,10);
 insert INTO Product (id, product_name, category_id, description, price, amount) values (nextval('product_seq'), 'printer Samsung',4, 'printer5',240,10);
 
-
 insert INTO Role(id, authority) values (nextval('role_seq'),'ADMIN');
 insert INTO Role(id, authority) values (nextval('role_seq'),'USER');
 
 insert INTO User(username, password, first_name, last_name, address,role_id) values ('admin' ,'$2a$10$IPJizmA0rxJBq9incE/PWub6B2nIDGm3z/2cIz6hAs/hgvKlQ5F9q', 'Szymon', 'Mantey', 'ul.Sikorskiego 2 Dziębówko 64-990', 1);
 insert INTO User(username, password, first_name, last_name, address,role_id) values ('user' ,'$2a$10$KvxPudrieuxpEgxw3e4yPOuYK59PgfQshx3RaVUTCpbKB82DC/0RC', 'Maria', 'Stachura', 'ul.Kolejowa 21 Piła 64-980', 2);
 
-
 insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'user',0);
 insert INTO Orders(id,user_username,status) values (nextVal('order_seq'), 'admin',1);
-
-
-
 
 commit;
