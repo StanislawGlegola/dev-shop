@@ -46,7 +46,7 @@ public class DevshopService {
     }
 
     public Product findProductById(int productId) {
-        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Id: "+productId+" is not found."));
+        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Id: " + productId + " is not found."));
     }
 
     //dodanne
@@ -62,7 +62,20 @@ public class DevshopService {
     }
 
     public OrderItem addOrderItem(OrderItem orderItem) {
-        return orderItemRepository.save(orderItem);
+// https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
+        //if is present to ma byc update/merge a jak nie to return save(orderItem)
+
+        Optional<OrderItem> byId = orderItemRepository.findById((long)orderItem.getProduct().getId());
+
+        if (byId.isPresent()){
+            int currentAmountInDb = byId.get().getAmount();
+            int orderItemAmount = orderItem.getAmount();
+            orderItem.setAmount(currentAmountInDb + orderItemAmount);
+            orderItemRepository.delete(orderItemRepository.getOne((long)orderItem.getProduct().getId()));
+            return orderItemRepository.save(orderItem);
+        } else {
+            return orderItemRepository.save(orderItem);
+        }
     }
 
     public List<OrderItem> findAllOrderItemsByOrder(Long ordersId) {
@@ -103,14 +116,13 @@ public class DevshopService {
 
     public Orders findOrderByOrderItemId(Long orderItemId) {
         Optional<OrderItem> byId = orderItemRepository.findById(orderItemId);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             OrderItem orderItem = byId.get();
             Product product = productRepository.findById(orderItem.getProduct().getId()).get();
             product.setAmount(product.getAmount() + 1);
             productRepository.save(product);
             return orderItem.getOrders();
-        }
-        else {
+        } else {
             throw new OrderItemNotFoundException("No such order.");
         }
     }
