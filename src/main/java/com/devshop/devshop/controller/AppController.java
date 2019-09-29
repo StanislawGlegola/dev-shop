@@ -113,4 +113,11 @@ public class AppController {
         devshopService.deleteOrderItemById(orderItemId);
         return "redirect:/cart/" + orders.getId();
     }
+
+    @GetMapping("/remove/{id}")
+    public String removePosition(@PathVariable int id) {
+        Product product = (devshopService.findProductById(id));
+        devshopService.removeProduct(product);
+        return "redirect:/productList/"+product.getCategory().getId();
+    }
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -46,7 +47,6 @@
                     <li class="w3-blue" style="text-align:center; width:150px"><a href="/addToCart/${product.id}">Add to cart</a></li>
                     <li class="w3-blue" style="text-align:center; width:150px"><a href="/admin/${product.id}">Edit</a></li>
                     <li class="w3-blue" style="text-align:center; width:150px"><a href="/remove/${product.id}">Remove</a></li>
-
                 </td>
                 </form>
             </tr>
