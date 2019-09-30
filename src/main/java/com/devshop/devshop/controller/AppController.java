@@ -44,10 +44,18 @@ public class AppController {
 
     @GetMapping("/productList/{id}")
     public ModelAndView getProductListByCategories(@PathVariable Long id) {
+        User user = sessionUserProvider.getLoggedUser();
         List<Product> productsList = devshopService.printProductsFromCategories(id);
         ModelAndView modelAndView = new ModelAndView("productList");
         modelAndView.addObject("products", productsList);
 
+        if (user != null) {
+            if (user.getRole().getAuthority().toUpperCase().equals("ADMIN")) {
+                    modelAndView.addObject("isAdmin", true);
+                } else if (user.getRole().getAuthority().toUpperCase().equals("USER")) {
+                    modelAndView.addObject("isAdmin", false);
+            }
+        }
         return modelAndView;
     }
 
@@ -118,6 +126,6 @@ public class AppController {
     public String removePosition(@PathVariable int id) {
         Product product = (devshopService.findProductById(id));
         devshopService.removeProduct(product);
-        return "redirect:/productList/"+product.getCategory().getId();
+        return "redirect:/productList/" + product.getCategory().getId();
     }
 }
