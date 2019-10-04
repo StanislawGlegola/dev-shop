@@ -1,6 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <html>
 <head>
     <title>devSHOP product list</title>
@@ -18,6 +16,10 @@
             text-align: left;
             width: 100px;
             height: 40px;
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -44,9 +46,9 @@
                 <td>${product.price}</td>
                 <td>${product.amount}</td>
                 <td>
-                    <li class="w3-blue" style="text-align:center; width:150px"><a href="/addToCart/${product.id}">Add to cart</a></li>
-                    <li class="w3-blue" style="text-align:center; width:150px"><a href="/admin/${product.id}">Edit</a></li>
-                    <li class="w3-blue" style="text-align:center; width:150px"><a href="/remove/${product.id}">Remove</a></li>
+                    <li class="w3-blue ${isAdmin ? 'hidden' : ''}" style="text-align:center; width:150px" ><a href="/addToCart/${product.id}">Add to cart</a></li>
+                    <li class="w3-blue ${isAdmin ? '' : 'hidden'}" style="text-align:center; width:150px" ><a href="/admin/${product.id}">Edit</a></li>
+                    <li class="w3-blue ${isAdmin ? '' : 'hidden'}" style="text-align:center; width:150px" ><a href="/remove/${product.id}">Remove</a></li>
                 </td>
                 </form>
             </tr>
