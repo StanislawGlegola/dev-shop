@@ -9,8 +9,6 @@ import com.devshop.devshop.repository.OrdersRepository;
 import com.devshop.devshop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
