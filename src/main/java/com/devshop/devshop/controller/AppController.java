@@ -101,10 +101,14 @@ public class AppController {
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
         Product product = devshopService.findProductById(id);
-        product.setAmount(product.getAmount() - 1);
-        OrderItem orderItem = new OrderItem(1, orders, product);
-        devshopService.addOrderItem(orderItem);
-        return "redirect:/cart/" + orders.getId();
+        if (product.getAmount() == 0) {
+            return "redirect:/productList/" + product.getCategory().getId();
+        } else {
+            product.setAmount(product.getAmount() - 1);
+            OrderItem orderItem = new OrderItem(1, orders, product);
+            devshopService.addOrderItem(orderItem);
+            return "redirect:/cart/" + orders.getId();
+        }
     }
 
     @GetMapping("/removeFromCart/{orderItemId}")
@@ -118,6 +122,6 @@ public class AppController {
     public String removePosition(@PathVariable int id) {
         Product product = (devshopService.findProductById(id));
         devshopService.removeProduct(product);
-        return "redirect:/productList/"+product.getCategory().getId();
+        return "redirect:/productList/" + product.getCategory().getId();
     }
 }

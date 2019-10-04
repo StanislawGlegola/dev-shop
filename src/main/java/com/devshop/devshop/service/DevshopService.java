@@ -94,7 +94,7 @@ public class DevshopService {
     }
 
     public void removeProduct(Product product) {
-        productRepository.delete(product);
+            productRepository.delete(product);
     }
 
     public void deleteOrderItemById(Long orderItemId) {
