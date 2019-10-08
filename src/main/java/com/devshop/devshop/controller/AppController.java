@@ -43,7 +43,7 @@ public class AppController {
     }
 
     @GetMapping("/productList/{id}")
-    public ModelAndView getProductListByCategories(@PathVariable Long id) {
+    public ModelAndView getProductListByCategories(@PathVariable int id) {
         List<Product> productsList = devshopService.printProductsFromCategories(id);
         ModelAndView modelAndView = new ModelAndView("productList");
         modelAndView.addObject("products", productsList);
@@ -84,7 +84,7 @@ public class AppController {
     }
 
     @GetMapping("/cart/{ordersId}")
-    public ModelAndView getCartLista(@PathVariable Long ordersId) {
+    public ModelAndView getCartLista(@PathVariable int ordersId) {
         List<OrderItem> orderedItems = devshopService.findProductsFromOrder(ordersId);
         ModelAndView modelAndView = new ModelAndView("cart");
         modelAndView.addObject("orderItems", orderedItems);
@@ -108,7 +108,7 @@ public class AppController {
     }
 
     @GetMapping("/removeFromCart/{orderItemId}")
-    public String removeFromCart(@PathVariable Long orderItemId) {
+    public String removeFromCart(@PathVariable int orderItemId) {
         Orders orders = devshopService.findOrderByOrderItemId(orderItemId);
         devshopService.deleteOrderItemById(orderItemId);
         return "redirect:/cart/" + orders.getId();

@@ -11,7 +11,7 @@ public class Product {
     @GeneratedValue(generator = "productSeq")
     //to informuje ze jest sekwencja o takiej nazwie która identyfikje identyfikatory. jej nazwa w bazie danych powinna byc product_seq).
     @SequenceGenerator(name = "productSeq", sequenceName = "product_seq", allocationSize = 1)
-    private long id;
+    private int id;
 
     private String productName;
     private String description;
@@ -39,7 +39,7 @@ public class Product {
     public Product() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

@@ -12,7 +12,7 @@ public class Category {
 	@Id
 	@GeneratedValue(generator = "categorySeq")
 	@SequenceGenerator(name = "categorySeq", sequenceName = "category_seq", allocationSize = 1)
-	private long id;
+	private int id;
 	private String categoryName;
 
 	public Category(String categoryName) {
@@ -23,11 +23,11 @@ public class Category {
 
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

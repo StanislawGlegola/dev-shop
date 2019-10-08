@@ -36,7 +36,7 @@ public class DevshopService {
         return orderedItems;
     }
 
-    public List<Product> printProductsFromCategories(Long categoryid) {
+    public List<Product> printProductsFromCategories(int categoryid) {
         List<Product> printProducts = productRepository.findByCategoryId(categoryid);
         return printProducts;
     }
@@ -45,14 +45,14 @@ public class DevshopService {
         productRepository.save(product);
     }
 
-    public Product findProductById(long productId) {
+    public Product findProductById(int productId) {
         return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Id: " + productId + " is not found."));
     }
 
     //dodanne
     public Optional<Product> addProductToCart(Product product) {
         // List<Product> products = productRepository.findAll();
-        long id = product.getId();
+        int id = product.getId();
         Optional<Product> productsInCart = productRepository.findById(id);
         return productsInCart;
     }
@@ -65,7 +65,7 @@ public class DevshopService {
         //https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
         //if is present to ma byc update/merge a jak nie to return save(orderItem)
 
-        long currentOrderItemProductId = orderItem.getProduct().getId();
+        int currentOrderItemProductId = orderItem.getProduct().getId();
         OrderItem orderItemByProductId = orderItemRepository.findOrderItemByProductId(currentOrderItemProductId);
 
         if (orderItemByProductId != null) {
@@ -79,7 +79,7 @@ public class DevshopService {
         }
     }
 
-    public List<OrderItem> findAllOrderItemsByOrder(Long ordersId) {
+    public List<OrderItem> findAllOrderItemsByOrder(int ordersId) {
         return orderItemRepository.findByOrders(ordersId);
     }
 
@@ -87,7 +87,7 @@ public class DevshopService {
         return orderItemRepository.findAll();
     }
 
-    public List<OrderItem> findProductsFromOrder(Long ordersId) {
+    public List<OrderItem> findProductsFromOrder(int ordersId) {
         return orderItemRepository.findByOrders(ordersId);
     }
 
@@ -111,11 +111,11 @@ public class DevshopService {
         productRepository.delete(product);
     }
 
-    public void deleteOrderItemById(Long orderItemId) {
+    public void deleteOrderItemById(int orderItemId) {
         orderItemRepository.deleteById(orderItemId);
     }
 
-    public Orders findOrderByOrderItemId(Long orderItemId) {
+    public Orders findOrderByOrderItemId(int orderItemId) {
         Optional<OrderItem> byId = orderItemRepository.findById(orderItemId);
         if (byId.isPresent()) {
             OrderItem orderItem = byId.get();
