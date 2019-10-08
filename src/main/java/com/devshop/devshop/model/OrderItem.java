@@ -9,7 +9,7 @@ public class OrderItem {
 	@Id
 	@GeneratedValue(generator = "orderitemSeq")
 	@SequenceGenerator(name = "orderitemSeq", sequenceName = "orderitem_seq", allocationSize = 1)
-	private long id;
+	private int id;
 	private int amount;
 
 	@ManyToOne(targetEntity = Orders.class)
@@ -33,11 +33,11 @@ public class OrderItem {
 		this.product = product;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

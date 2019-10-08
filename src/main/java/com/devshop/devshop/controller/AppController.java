@@ -43,7 +43,7 @@ public class AppController {
     }
 
     @GetMapping("/productList/{id}")
-    public ModelAndView getProductListByCategories(@PathVariable Long id) {
+    public ModelAndView getProductListByCategories(@PathVariable int id) {
         User user = sessionUserProvider.getLoggedUser();
         List<Product> productsList = devshopService.printProductsFromCategories(id);
         ModelAndView modelAndView = new ModelAndView("productList");
@@ -93,7 +93,7 @@ public class AppController {
     }
 
     @GetMapping("/cart/{ordersId}")
-    public ModelAndView getCartLista(@PathVariable Long ordersId) {
+    public ModelAndView getCartLista(@PathVariable int ordersId) {
         List<OrderItem> orderedItems = devshopService.findProductsFromOrder(ordersId);
         ModelAndView modelAndView = new ModelAndView("cart");
         modelAndView.addObject("orderItems", orderedItems);
@@ -109,18 +109,16 @@ public class AppController {
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
         Product product = devshopService.findProductById(id);
-        if (product.getAmount() == 0) {
-            return "redirect:/productList/" + product.getCategory().getId();
-        } else {
-            product.setAmount(product.getAmount() - 1);
-            OrderItem orderItem = new OrderItem(1, orders, product);
-            devshopService.addOrderItem(orderItem);
-            return "redirect:/cart/" + orders.getId();
-        }
+        int amount = 1;
+        product.setAmount(product.getAmount() - amount);
+        OrderItem orderItem = new OrderItem(amount, orders, product);
+        devshopService.addOrderItem(orderItem);
+        return "redirect:/cart/" + orders.getId();
     }
 
+
     @GetMapping("/removeFromCart/{orderItemId}")
-    public String removeFromCart(@PathVariable Long orderItemId) {
+    public String removeFromCart(@PathVariable int orderItemId) {
         Orders orders = devshopService.findOrderByOrderItemId(orderItemId);
         devshopService.deleteOrderItemById(orderItemId);
         return "redirect:/cart/" + orders.getId();

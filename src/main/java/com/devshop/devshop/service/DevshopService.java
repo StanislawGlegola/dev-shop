@@ -36,7 +36,7 @@ public class DevshopService {
         return orderedItems;
     }
 
-    public List<Product> printProductsFromCategories(Long categoryid) {
+    public List<Product> printProductsFromCategories(int categoryid) {
         List<Product> printProducts = productRepository.findByCategoryId(categoryid);
         return printProducts;
     }
@@ -46,7 +46,7 @@ public class DevshopService {
     }
 
     public Product findProductById(int productId) {
-        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Id: "+productId+" is not found."));
+        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Id: " + productId + " is not found."));
     }
 
     //dodanne
@@ -57,15 +57,29 @@ public class DevshopService {
         return productsInCart;
     }
 
-    Orders addOrders(Orders order) {
+    public Orders addOrders(Orders order) {
         return ordersRepository.save(order);
     }
 
     public OrderItem addOrderItem(OrderItem orderItem) {
-        return orderItemRepository.save(orderItem);
+        //https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
+        //if is present to ma byc update/merge a jak nie to return save(orderItem)
+
+        int currentOrderItemProductId = orderItem.getProduct().getId();
+        OrderItem orderItemByProductId = orderItemRepository.findOrderItemByProductId(currentOrderItemProductId);
+
+        if (orderItemByProductId != null) {
+            int currentAmountInDb = orderItemByProductId.getAmount();
+            int orderItemAmount = orderItem.getAmount();
+            orderItem.setAmount(currentAmountInDb + orderItemAmount);
+            orderItemRepository.delete(orderItemRepository.findOrderItemByProductId(currentOrderItemProductId));
+            return orderItemRepository.save(orderItem);
+        } else {
+            return orderItemRepository.save(orderItem);
+        }
     }
 
-    public List<OrderItem> findAllOrderItemsByOrder(Long ordersId) {
+    public List<OrderItem> findAllOrderItemsByOrder(int ordersId) {
         return orderItemRepository.findByOrders(ordersId);
     }
 
@@ -73,7 +87,7 @@ public class DevshopService {
         return orderItemRepository.findAll();
     }
 
-    public List<OrderItem> findProductsFromOrder(Long ordersId) {
+    public List<OrderItem> findProductsFromOrder(int ordersId) {
         return orderItemRepository.findByOrders(ordersId);
     }
 
@@ -97,20 +111,19 @@ public class DevshopService {
             productRepository.delete(product);
     }
 
-    public void deleteOrderItemById(Long orderItemId) {
+    public void deleteOrderItemById(int orderItemId) {
         orderItemRepository.deleteById(orderItemId);
     }
 
-    public Orders findOrderByOrderItemId(Long orderItemId) {
+    public Orders findOrderByOrderItemId(int orderItemId) {
         Optional<OrderItem> byId = orderItemRepository.findById(orderItemId);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             OrderItem orderItem = byId.get();
             Product product = productRepository.findById(orderItem.getProduct().getId()).get();
             product.setAmount(product.getAmount() + 1);
             productRepository.save(product);
             return orderItem.getOrders();
-        }
-        else {
+        } else {
             throw new OrderItemNotFoundException("No such order.");
         }
     }
