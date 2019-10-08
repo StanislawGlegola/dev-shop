@@ -9,7 +9,7 @@ public class Orders {
 	@Id
 	@GeneratedValue(generator = "orderSeq")
 	@SequenceGenerator(name = "orderSeq", sequenceName = "order_seq", allocationSize = 1)
-	private long id;
+	private int id;
 
 	@ManyToOne(targetEntity = User.class)
 	private User user;
@@ -36,7 +36,7 @@ public class Orders {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
