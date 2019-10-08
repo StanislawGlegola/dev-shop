@@ -45,33 +45,34 @@ public class DevshopService {
         productRepository.save(product);
     }
 
-    public Product findProductById(int productId) {
+    public Product findProductById(long productId) {
         return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Id: " + productId + " is not found."));
     }
 
     //dodanne
     public Optional<Product> addProductToCart(Product product) {
         // List<Product> products = productRepository.findAll();
-        int id = product.getId();
+        long id = product.getId();
         Optional<Product> productsInCart = productRepository.findById(id);
         return productsInCart;
     }
 
-    Orders addOrders(Orders order) {
+    public Orders addOrders(Orders order) {
         return ordersRepository.save(order);
     }
 
     public OrderItem addOrderItem(OrderItem orderItem) {
-// https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
+        //https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
         //if is present to ma byc update/merge a jak nie to return save(orderItem)
 
-        Optional<OrderItem> byId = orderItemRepository.findById((long)orderItem.getProduct().getId());
+        long currentOrderItemProductId = orderItem.getProduct().getId();
+        OrderItem orderItemByProductId = orderItemRepository.findOrderItemByProductId(currentOrderItemProductId);
 
-        if (byId.isPresent()){
-            int currentAmountInDb = byId.get().getAmount();
+        if (orderItemByProductId != null) {
+            int currentAmountInDb = orderItemByProductId.getAmount();
             int orderItemAmount = orderItem.getAmount();
             orderItem.setAmount(currentAmountInDb + orderItemAmount);
-            orderItemRepository.delete(orderItemRepository.getOne((long)orderItem.getProduct().getId()));
+            orderItemRepository.delete(orderItemRepository.findOrderItemByProductId(currentOrderItemProductId));
             return orderItemRepository.save(orderItem);
         } else {
             return orderItemRepository.save(orderItem);

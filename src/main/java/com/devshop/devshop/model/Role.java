@@ -14,7 +14,7 @@ public class Role implements GrantedAuthority {
 	@Id
 	@GeneratedValue(generator = "roleSeq")
 	@SequenceGenerator(name = "roleSeq", sequenceName = "role_seq", allocationSize = 1)
-	private Long id;
+	private long id;
 	private String authority;
 
 	public Long getId() {

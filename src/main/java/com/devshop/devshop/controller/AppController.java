@@ -47,7 +47,6 @@ public class AppController {
         List<Product> productsList = devshopService.printProductsFromCategories(id);
         ModelAndView modelAndView = new ModelAndView("productList");
         modelAndView.addObject("products", productsList);
-
         return modelAndView;
     }
 
