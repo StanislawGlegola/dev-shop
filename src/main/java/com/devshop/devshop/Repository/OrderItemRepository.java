@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
+public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
 
 	@Query(value = "SELECT * from order_item WHERE orders_id = :orders", nativeQuery = true)
-	List<OrderItem> findByOrders(Long orders);
+	List<OrderItem> findByOrders(int orders);
 
-	OrderItem findOrderItemByProductId(Long id);
+	OrderItem findOrderItemByProductId(int id);
 
 }
