@@ -51,9 +51,9 @@ public class AppController {
 
         if (user != null) {
             if (user.getRole().getAuthority().toUpperCase().equals("ADMIN")) {
-                    modelAndView.addObject("isAdmin", true);
-                } else if (user.getRole().getAuthority().toUpperCase().equals("USER")) {
-                    modelAndView.addObject("isAdmin", false);
+                modelAndView.addObject("isAdmin", true);
+            } else if (user.getRole().getAuthority().toUpperCase().equals("USER")) {
+                modelAndView.addObject("isAdmin", false);
             }
         }
         return modelAndView;
@@ -101,19 +101,20 @@ public class AppController {
     }
 
     @GetMapping("/addToCart/{id}")
-    public String addProductToCart(@PathVariable int id) {  //zad3
-        //User session Needed!
-        //znaleźć zamówienie uzytkownika,jeżeli istnieje i status = false(niezrealizowane)
-        //uzyć id tego zamowenia i dopisywać produkty jezlei nie istnieje lub status = true(zrealizowane)- utworzyc nowe zamowienie i dodać produkty.
-        //save order repository dodac metody w serwisie wykorzystująć  repository, dodać order do bazy danych a nastepnie zwrocic order id do productCart redirect
+    public String addProductToCart(@PathVariable int id) {
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
         Product product = devshopService.findProductById(id);
-        int amount = 1;
-        product.setAmount(product.getAmount() - amount);
-        OrderItem orderItem = new OrderItem(amount, orders, product);
-        devshopService.addOrderItem(orderItem);
-        return "redirect:/cart/" + orders.getId();
+
+        if (user.getRole().getAuthority().equals("USER")) {
+            int amount = 1;
+            product.setAmount(product.getAmount() - amount);
+            OrderItem orderItem = new OrderItem(amount, orders, product);
+            devshopService.addOrderItem(orderItem);
+            return "redirect:/cart/" + orders.getId();
+        } else {
+            return "redirect:/cart/" + orders.getId();
+        }
     }
 
 
