@@ -70,10 +70,19 @@ public class AppController {
     }
 
     @GetMapping("/admin")
-    public ModelAndView viewAdminProductAddFormular() {
+    public ModelAndView viewAdminPanel() {
         ModelAndView modelAndView = new ModelAndView("admin");
         modelAndView.addObject("product", new Product());
         modelAndView.addObject("edit", false);
+        return modelAndView;
+    }
+
+   @GetMapping("/admin/{productId}")
+    public ModelAndView adminEditingProductPanel(@PathVariable int productId) {
+        ModelAndView modelAndView = new ModelAndView("admin");
+        Product foundProduct = devshopService.findProductById(productId);
+        modelAndView.addObject("product", foundProduct);
+        modelAndView.addObject("edit", true);
         return modelAndView;
     }
 
@@ -83,17 +92,8 @@ public class AppController {
         return "redirect:/productList/" + product.getCategory().getId();
     }
 
-    @GetMapping("/admin/{productId}")
-    public ModelAndView updateProductListView(@PathVariable int productId) {
-        ModelAndView modelAndView = new ModelAndView("admin");
-        Product foundProduct = devshopService.findProductById(productId);
-        modelAndView.addObject("product", foundProduct);
-        modelAndView.addObject("edit", true);
-        return modelAndView;
-    }
-
     @GetMapping("/cart/{ordersId}")
-    public ModelAndView getCartLista(@PathVariable int ordersId) {
+    public ModelAndView viewOrderItemsList(@PathVariable int ordersId) {
         List<OrderItem> orderedItems = devshopService.findProductsFromOrder(ordersId);
         ModelAndView modelAndView = new ModelAndView("cart");
         modelAndView.addObject("orderItems", orderedItems);
@@ -101,15 +101,15 @@ public class AppController {
     }
 
     @GetMapping("/addToCart/{id}")
-    public String addProductToCart(@PathVariable int id) {
+    public String addProductFromProductListToCart(@PathVariable int id) {
         User user = sessionUserProvider.getLoggedUser();
         Orders orders = devshopService.findOrderByUsername(user);
         Product product = devshopService.findProductById(id);
 
         if (user.getRole().getAuthority().equals("USER")) {
-            int amount = 1;
-            product.setAmount(product.getAmount() - amount);
-            OrderItem orderItem = new OrderItem(amount, orders, product);
+            int amountOfProductsToMoveFromProdListToCart = 1;
+            product.setAmount(product.getAmount() - amountOfProductsToMoveFromProdListToCart);
+            OrderItem orderItem = new OrderItem(amountOfProductsToMoveFromProdListToCart, orders, product);
             devshopService.addOrderItem(orderItem);
             return "redirect:/cart/" + orders.getId();
         } else {
@@ -117,16 +117,25 @@ public class AppController {
         }
     }
 
-
     @GetMapping("/removeFromCart/{orderItemId}")
     public String removeFromCart(@PathVariable int orderItemId) {
         Orders orders = devshopService.findOrderByOrderItemId(orderItemId);
+
+        // 1. stworzyc dobre obiekty
+        OrderItem orderItem = devshopService.findOrderItemsById(orderItemId);
+        Product product = orderItem.getProduct();
+        // 2. logika cofania amount do obiektu
+        int amountReduce = 1;
+        int amountInOrder = orderItem.getAmount();
+        int amountInProduct = product.getAmount();
+        product.setAmount(amountInOrder+amountInProduct-amountReduce);
+        // 3. zapisanie tego
         devshopService.deleteOrderItemById(orderItemId);
         return "redirect:/cart/" + orders.getId();
     }
 
     @GetMapping("/remove/{id}")
-    public String removePosition(@PathVariable int id) {
+    public String removeProductFromProductsList(@PathVariable int id) {
         Product product = (devshopService.findProductById(id));
         devshopService.removeProduct(product);
         return "redirect:/productList/" + product.getCategory().getId();
