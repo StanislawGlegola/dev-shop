@@ -49,21 +49,11 @@ public class DevshopService {
         return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Id: " + productId + " is not found."));
     }
 
-    //dodanne
-    public Optional<Product> addProductToCart(Product product) {
-        // List<Product> products = productRepository.findAll();
-        int id = product.getId();
-        Optional<Product> productsInCart = productRepository.findById(id);
-        return productsInCart;
-    }
-
     public Orders addOrders(Orders order) {
         return ordersRepository.save(order);
     }
 
     public OrderItem addOrderItem(OrderItem orderItem) {
-        //https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
-        //if is present to ma byc update/merge a jak nie to return save(orderItem)
 
         int currentOrderItemProductId = orderItem.getProduct().getId();
         OrderItem orderItemByProductId = orderItemRepository.findOrderItemByProductId(currentOrderItemProductId);
@@ -77,14 +67,6 @@ public class DevshopService {
         } else {
             return orderItemRepository.save(orderItem);
         }
-    }
-
-    public List<OrderItem> findAllOrderItemsByOrder(int ordersId) {
-        return orderItemRepository.findByOrders(ordersId);
-    }
-
-    public List<OrderItem> findAllProductFromOrder() {
-        return orderItemRepository.findAll();
     }
 
     public List<OrderItem> findProductsFromOrder(int ordersId) {
@@ -108,7 +90,7 @@ public class DevshopService {
     }
 
     public void removeProduct(Product product) {
-            productRepository.delete(product);
+        productRepository.delete(product);
     }
 
     public void deleteOrderItemById(int orderItemId) {
@@ -126,5 +108,10 @@ public class DevshopService {
         } else {
             throw new OrderItemNotFoundException("No such order.");
         }
+    }
+
+    public OrderItem findOrderItemsById(int orderItemId) {
+        OrderItem orderItem = orderItemRepository.findOrderItemById(orderItemId);
+        return orderItem;
     }
 }
