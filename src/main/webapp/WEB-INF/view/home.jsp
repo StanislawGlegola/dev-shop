@@ -31,7 +31,7 @@
     <legend>About</legend>
     <p>This project was written in collaboration by three programmers:</p>
     Stanislaw Glegola <a href="https://www.linkedin.com/in/stanislawglegola/">Linkedin</a> <a href="https://github.com/StanislawGlegola">GitHub</a><br>
-    Szymon Manatey <a href="https://www.linkedin.com/in/szymon-mantey-933974105/">Linkedin</a> <a href="https://github.com/vanndhall">GitHub</a><br>
+    Szymon Mantey <a href="https://www.linkedin.com/in/szymon-mantey-933974105/">Linkedin</a> <a href="https://github.com/vanndhall">GitHub</a><br>
     Michal Mataczynski <a href="https://www.linkedin.com/in/michalmataczynski/">Linkedin</a> <a href="https://github.com/matacz83">GitHub</a>
 </fieldset>
 </body>
